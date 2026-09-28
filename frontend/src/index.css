@@ -1,0 +1,73 @@
+/* Fonts are bundled from node_modules - no Google Fonts, no CDN. */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink-300 rounded;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-ink-100 rounded-lg shadow-card;
+  }
+  .card-pad {
+    @apply p-5;
+  }
+  .label {
+    @apply text-[11px] font-semibold uppercase tracking-wider text-ink-500;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium
+      transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600;
+  }
+  .btn-ghost {
+    @apply btn border border-ink-300 bg-white text-ink-700 hover:bg-ink-50;
+  }
+  .btn-danger {
+    @apply btn border border-risk-high/30 bg-risk-highbg text-risk-high hover:bg-red-100;
+  }
+  .btn-ok {
+    @apply btn border border-risk-low/30 bg-risk-lowbg text-risk-low hover:bg-green-100;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px]
+      font-semibold whitespace-nowrap;
+  }
+  .th {
+    @apply px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wider
+      text-ink-500 border-b border-ink-100 bg-ink-50/70;
+  }
+  .td {
+    @apply px-3 py-2 text-sm border-b border-ink-100 align-top;
+  }
+  .link {
+    @apply text-accent-600 hover:text-accent-700 hover:underline;
+  }
+  .mono {
+    @apply font-mono text-[12px];
+  }
+}

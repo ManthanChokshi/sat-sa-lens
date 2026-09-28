@@ -1,0 +1,5 @@
+# Optional heavy ML extras for D04 semantic note similarity.
+# Install once on a networked machine, then the model folder is bundled and
+# the app never reaches the network again (HF_HUB_OFFLINE=1).
+sentence-transformers==3.3.1
+torch==2.5.1

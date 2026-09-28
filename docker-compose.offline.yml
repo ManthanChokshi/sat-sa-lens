@@ -1,0 +1,25 @@
+# Air-gap proof.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.offline.yml up -d
+#
+# This marks the application network `internal`, so the backend - the component
+# that holds the model, the database and every analytic - has no route off the
+# host at all, not even to DNS. If anything in it tried to call out it would
+# fail loudly instead of silently succeeding on a laptop that happens to have
+# Wi-Fi. The frontend keeps a second network purely so the host can open the UI
+# on port 8080; nginx there serves static files and proxies to the backend, and
+# makes no outbound requests of its own.
+#
+# Verify after starting:
+#   docker compose exec backend python -c \
+#     "import socket; socket.create_connection(('1.1.1.1', 53), 3)"
+# That must fail with a network-unreachable error.
+services:
+  backend:
+    networks: [satsa]
+  frontend:
+    networks: [satsa, edge]
+
+networks:
+  satsa:
+    internal: true

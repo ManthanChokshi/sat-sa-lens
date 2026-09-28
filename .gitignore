@@ -1,0 +1,32 @@
+# data and models are generated or downloaded, never committed
+data/
+models/
+*.duckdb
+*.duckdb.wal
+
+# python
+backend/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# packaging
+dist/
+*.tar
+*.tar.gz
+
+# editors / os
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# keep the models folder in git, but not its contents
+!models/README.md

@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        WITH_ML: "${SATSA_WITH_ML:-0}"
+    image: satsa-lens-backend:1.0.0
+    environment:
+      # On first start, generate the sample corpus, ingest it and analyse it.
+      SATSA_AUTO_BOOTSTRAP: "1"
+      SATSA_PSEUDO_SALT: "${SATSA_PSEUDO_SALT:-change-me-in-production}"
+      SATSA_SEED: "42"
+    volumes:
+      - satsa-data:/data
+    # The backend is the only component with a model and a database, so it is
+    # the one that must never have a route off the host.
+    networks: [satsa]
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: satsa-lens-frontend:1.0.0
+    depends_on:
+      backend:
+        condition: service_started
+    ports:
+      - "8080:80"
+    # `edge` exists only so the host can reach the UI on port 8080.
+    networks: [satsa, edge]
+    restart: unless-stopped
+
+volumes:
+  satsa-data:
+
+networks:
+  satsa:
+    driver: bridge
+  edge:
+    driver: bridge
