@@ -30,3 +30,6 @@ dist/
 
 # keep the models folder in git, but not its contents
 !models/README.md
+
+# local video project (large renders/captures)
+videos/

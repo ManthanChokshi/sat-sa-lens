@@ -1,0 +1,10 @@
+{
+  "name": "sat-sa-lens-deck",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Generator for the SIH 2026 idea-submission deck (SIH26157)",
+  "scripts": {
+    "build": "node build.js ../SAT-SA-Lens-SIH26157.pptx"
+  },
+  "dependencies": { "pptxgenjs": "^3.12.0" }
+}
